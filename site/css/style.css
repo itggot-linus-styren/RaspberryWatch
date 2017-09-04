@@ -1,5 +1,10 @@
 html {
     font-family: Roboto;
+    overflow-x: hidden;
+}
+
+html * {
+    z-index: 1;
 }
 
 body {
@@ -7,9 +12,72 @@ body {
     margin: 0;
 }
 
+/* simple rule to display content within div in center */
+.center-content {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+
+.scrollView {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: calc(100vh - 50px);
+    z-index: 2;
+	background:  #408E2F;
+	background-image: -webkit-linear-gradient(top,  #408E2F, #216A12);
+	background-image: -moz-linear-gradient(top,  #408E2F, #216A12);
+	background-image: -ms-linear-gradient(top,  #408E2F, #216A12);
+	background-image: -o-linear-gradient(top,  #408E2F, #216A12);
+	background-image: linear-gradient(to bottom,  #408E2F, #216A12);
+	transition: opacity 1s;
+	opacity: 0;
+	display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.scrollView.show {
+	opacity: 1;
+}
+
+.scrollView.show > .scrollButton {
+	transform: none;
+}
+
+.scrollButton {
+	background: none;
+	-webkit-border-radius: 20;
+	-moz-border-radius: 20;
+	border-radius: 20px;
+	border: solid 2px aliceblue;
+	font-family: Roboto;
+	color: #ffffff;
+	font-size: 16px;
+	padding: 10px 20px 10px 20px;
+	text-decoration: none;
+	transform: translateX(-100vw);
+	transition: transform 0.5s;
+}
+
+.scrollButton:hover {
+	background: #9AD58E;
+	background-image: -webkit-linear-gradient(top, #9AD58E, #408E2F);
+	background-image: -moz-linear-gradient(top, #9AD58E, #408E2F);
+	background-image: -ms-linear-gradient(top, #9AD58E, #408E2F);
+	background-image: -o-linear-gradient(top, #9AD58E, #408E2F);
+	background-image: linear-gradient(to bottom, #9AD58E, #408E2F);
+	text-decoration: none;
+}
+
 .container {
     display: grid;
     height: 100vh;
+}
+
+.section-1 {
     grid-template-rows: 1.5fr 1fr 3fr;
     grid-template-columns: 100vw;
     grid-template-areas:
@@ -20,10 +88,11 @@ body {
 
 .item-a {
     display: flex;
-    background: #408E2F;
+    background-color: #408E2F;
     grid-area: header;
     align-items: center;
     justify-content: center;
+    z-index: 2;
 }
 
 .item-a > h1 {
@@ -32,16 +101,25 @@ body {
 }
 
 .item-b {
-    display: flex;
-    background: #ffffff;
+    display: grid;
+    background-color: #ffffff;
     align-self: center;
     justify-content: center;
+    align-items: center;
     grid-area: main;
+    grid-template-rows: 100%;
+    grid-template-columns: 100vw;
+    grid-template-areas:
+    "img"
+}
+
+.item-b > img {
+    grid-area: img;
 }
 
 .item-c {
     display: grid;
-    background: #216A12;
+    background-color: #216A12;
     grid-area: footer;
     grid-template-rows: repeat(3, 1fr);
 }
@@ -50,4 +128,231 @@ body {
     color: white;
     font-size: 20px;
     text-align: center;
+}
+
+.section-2 {
+	height: calc(100vh - 50px)
+    grid-template-rows: 1fr 2fr 2fr;
+    grid-template-columns: 100vw;
+    grid-template-areas:
+    "header"
+    "content1"
+    "content2";
+}
+
+.item-d {
+    height: 100%;
+    display: flex;
+    background-color: #ffffff;
+    grid-area: header;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-d > h1 {
+    font-size: 36px;
+    color: #68B159;
+}
+
+.item-e {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    align-self: center;
+    justify-content: center;
+    grid-area: content1;
+}
+
+.item-e .text {
+    font-weight: bold;
+}
+
+.item-f {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    align-self: center;
+    justify-content: center;
+    grid-area: content2;
+}
+
+.image-container {
+    position: relative;
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+
+.text {
+  background-color: rgba(255, 102, 0, 0.95); /* 255, 102, 0 */
+  border-radius: 48px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 24px 48px;
+}
+
+/* simple css rule to display fractions with the horizontal divider using inline-block */
+.fraction {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0.2em 0.4ex;
+    text-align: center;
+}
+.fraction > span {
+    display: block;
+    padding-top: 0.15em;
+}
+.fraction span.fdn {border-top: thin solid black;}
+.fraction span.bar {display: none;}
+
+.item-e > p, .item-f > p {
+    color: black;
+    font-size: 16px;
+    text-align: center;
+}
+
+.section-3 {
+    position: absolute;
+    background-color: #408E2F;
+    grid-template-rows: 100px calc(100% - 100px);
+    grid-template-columns: 100vw;
+    grid-template-areas:
+    "header"
+    "content";
+}
+
+.item-g {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: center;
+    grid-area: header;
+}
+
+.item-g > h1 {
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+}
+
+.item-h {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: center;
+    grid-area: content;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.item-h > p {
+    color: #ffffff;
+    font-size: 20px;
+    text-align: center;
+}
+
+.placeholder {
+    display: none;
+}
+
+@media (min-width:600px) {
+
+    .item-a > h1 {
+        font-size: 48px;
+    }
+
+   .item-b > .placeholder {
+       display: block;
+       width: 1024px;
+       height: calc(525px / 1.25);
+       grid-area: img;
+   }
+
+   .item-b > img {
+       position: fixed;
+       top: 0;
+       left: calc((100vw - 1024px) / 2);
+       width:0px;
+       height:0px;
+       padding-left: 1024px;
+       padding-top: 525px;
+       background: url("../img/watch_desktop.jpg");
+       z-index: 0;
+   }
+
+   .section-2 {
+        height: calc(525px * 2.5 + 50px);
+    }
+
+   .item-e img {
+       width:0px;
+       height:0px;
+       padding-left: 1024px;
+       padding-top: 525px;
+       background: url("../img/watch_orig_desktop.jpg");
+   }
+
+   .item-e p {
+       font-size: 20px;
+   }
+
+    .item-f img {
+       width:0px;
+       height:0px;
+       padding-left: 1024px;
+       padding-top: 525px;
+       background: url("../img/watch_inverto_desktop.jpg");
+    }
+
+   .item-f p {
+       font-size: 20px;
+   }
+
+   .item-f span {
+       font-size: 20px;
+   }
+
+    .item-h {
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+
+    .item-h > p {
+        font-size: 32px;
+    }
+
+    .middle {
+        opacity: 0;
+    }
+
+    .image-container:hover > .middle {
+      opacity: 1;
+      cursor: pointer;
+    }
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
 }
